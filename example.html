@@ -1,0 +1,40 @@
+<html>
+<head><style>span { display: block; }</style></head>
+<body>
+    <button id="btn">Change</button>
+    <div id="root"></div>
+    <script type="text/javascript" src="vdom.js"></script>
+    <script>
+        const a = dom(
+  'div',
+  null,
+  dom('span', null, '123'),
+  dom('span', null, '456'),
+  dom('span', null, '789'),
+)
+// 对虚拟 DOM 的直接声明，等效于以下注释代码
+/*
+const a = (
+  <div>
+    <span>123</span>
+    <span>456</span>
+    <span>789</span>
+  </div>
+)
+*/
+const b = dom(
+  'div',
+  null,
+  dom('span', null, '123'),
+  dom('span', null, '456'),
+  dom('span', null, '666')
+)
+const $root = document.getElementById('root')
+const $btn = document.getElementById('btn')
+updateElement($root, a)
+$btn.addEventListener('click', () => {
+  updateElement($root, b, a)
+})
+    </script>
+</body>
+</html>
